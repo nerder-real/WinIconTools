@@ -1,0 +1,9 @@
+# 构建产物（发布时作为 Release 附件上传）
+*.exe
+
+# 用户个人文件
+win10菜单传统右键.bat
+
+# 系统杂项
+Thumbs.db
+Desktop.ini
