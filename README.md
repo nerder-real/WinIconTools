@@ -71,7 +71,7 @@ cd src
 build.cmd
 ```
 
-产物为项目根目录的 `WinIconTweaker-v<版本>.exe`（构建输出名，含 UAC 清单、多尺寸图标、内嵌资源）。版本号在 `build.cmd` 顶部的 `APP_VERSION` 处统一修改，exe 文件名与界面底部版本号自动跟随；发布 Release 时将其重命名为 `桌面图标美化工具-v<版本>.exe` 作为附件上传（构建产物名与仓库名一致）。
+产物为项目根目录的 `桌面图标美化工具-v<版本>.exe`（构建时先产出 `WinIconTools-v<版本>.exe`，随后自动改名为中文发布名；含 UAC 清单、多尺寸图标、内嵌资源）。版本号在 `build.cmd` 顶部的 `APP_VERSION` 处统一修改，exe 文件名与界面底部版本号自动跟随；发布 Release 时将其重命名为 `桌面图标美化工具-v<版本>.exe` 作为附件上传（构建产物名与仓库名一致）。
 
 <details>
 <summary>构建细节</summary>

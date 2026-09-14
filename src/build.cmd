@@ -28,9 +28,9 @@ rem Generate VersionInfo.cs from APP_VERSION (shown in the app footer)
 >> VersionInfo.cs echo     }
 >> VersionInfo.cs echo }
 
-echo Building: WinIconTweaker-v%APP_VERSION%.exe ...
+echo Building: WinIconTools-v%APP_VERSION%.exe ...
 "%CSC%" /nologo /target:winexe /platform:anycpu /optimize+ ^
-    /out:"..\WinIconTweaker-v%APP_VERSION%.exe" ^
+    /out:"..\WinIconTools-v%APP_VERSION%.exe" ^
     /win32manifest:app.manifest ^
     /win32icon:app.ico ^
     /resource:blank.ico,blank.ico ^
@@ -43,5 +43,6 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
-echo [OK] Generated: WinIconTweaker-v%APP_VERSION%.exe
+echo [OK] Generated: WinIconTools-v%APP_VERSION%.exe
+powershell -NoProfile -ExecutionPolicy Bypass -File release.ps1
 pause
