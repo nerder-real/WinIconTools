@@ -17,15 +17,6 @@
 
 **状态卡**：四行实时状态（名称 + 彩色状态点 + 右侧徽标），哪个方案生效哪个按钮亮，一目了然。
 
-## 📦 下载与使用
-
-1. 从 [Releases](../../releases) 下载 `桌面图标美化工具-v1.0.0.exe`；
-2. 双击运行，UAC 弹窗点「是」（程序需要管理员权限修改注册表）；
-3. 点击对应方案按钮即可，完成后自动重建图标缓存并重启资源管理器，桌面立即生效；
-4. 程序为**单实例**，重复双击会提示已在运行；Esc 可关闭窗口。
-
-> 无需安装 .NET：Win10/11 系统自带运行时。exe 完全自包含（blank.ico 等资源已内嵌），可单独拷贝到任意位置运行。
-
 ## 🎨 界面预览
 
 | 深色模式 | 浅色模式 |
@@ -62,6 +53,15 @@
 
 双击运行 → 菜单选择 → 自动执行，逻辑与 GUI 版一致。`legacy/快捷方式小箭头.cmd` 为最早的合并版脚本（存档）。
 
+## 📦 下载与使用
+
+1. 从 [Releases](../../releases) 下载 `桌面图标美化工具-v1.0.0.exe`；
+2. 双击运行，UAC 弹窗点「是」（程序需要管理员权限修改注册表）；
+3. 点击对应方案按钮即可，完成后自动重建图标缓存并重启资源管理器，桌面立即生效；
+4. 程序为**单实例**，重复双击会提示已在运行；Esc 可关闭窗口。
+
+> 无需安装 .NET：Win10/11 系统自带运行时。exe 完全自包含（blank.ico 等资源已内嵌），可单独拷贝到任意位置运行。
+
 ## 🧱 从源码构建
 
 无需安装 Visual Studio，Windows 自带的 .NET Framework 编译器即可：
@@ -71,7 +71,7 @@ cd src
 build.cmd
 ```
 
-产物为项目根目录的 `DesktopIconBeautifier-v<版本>.exe`（含 UAC 清单、多尺寸图标、内嵌资源）。版本号在 `build.cmd` 顶部的 `APP_VERSION` 处统一修改，exe 文件名与界面底部版本号自动跟随；发布 Release 时将其重命名为 `桌面图标美化工具-v<版本>.exe` 作为附件上传。
+产物为项目根目录的 `DesktopIconBeautifier-v<版本>.exe`（构建输出名，含 UAC 清单、多尺寸图标、内嵌资源）。版本号在 `build.cmd` 顶部的 `APP_VERSION` 处统一修改，exe 文件名与界面底部版本号自动跟随；发布 Release 时将其重命名为 `桌面图标美化工具-v<版本>.exe` 作为附件上传。
 
 <details>
 <summary>构建细节</summary>
@@ -80,7 +80,7 @@ build.cmd
 - `/win32manifest:app.manifest` → requireAdministrator
 - `/win32icon:app.ico` → 多尺寸 32-bit 图标（`gen-icon.ps1` 生成）
 - 内嵌资源：`blank.ico`（透明图标）、`logo64.png`（标题栏高清 LOGO）
-- `app.manifest.invoker` 为开发预览用 asInvoker 清单，非发布必需
+- `src/VersionInfo.cs` 由 build.cmd 自动生成（勿手改）；`app.manifest.invoker` 为开发预览用 asInvoker 清单，非发布必需
 </details>
 
 ## ❓ 常见问题
@@ -114,8 +114,3 @@ build.cmd
 ## 📄 许可证
 
 [MIT License](LICENSE)
-
-## 🙏 致谢
-
-- 灵感与注册表方案来自社区广泛流传的 Dism++、Winaero Tweaker 及各类右键菜单脚本
-- 原始 cmd 合并版脚本见 `legacy/`
