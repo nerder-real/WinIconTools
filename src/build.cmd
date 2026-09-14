@@ -28,9 +28,9 @@ rem Generate VersionInfo.cs from APP_VERSION (shown in the app footer)
 >> VersionInfo.cs echo     }
 >> VersionInfo.cs echo }
 
-echo Building: DesktopIconBeautifier-v%APP_VERSION%.exe ...
+echo Building: WinIconTweaker-v%APP_VERSION%.exe ...
 "%CSC%" /nologo /target:winexe /platform:anycpu /optimize+ ^
-    /out:"..\DesktopIconBeautifier-v%APP_VERSION%.exe" ^
+    /out:"..\WinIconTweaker-v%APP_VERSION%.exe" ^
     /win32manifest:app.manifest ^
     /win32icon:app.ico ^
     /resource:blank.ico,blank.ico ^
@@ -43,5 +43,5 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
-echo [OK] Generated: DesktopIconBeautifier-v%APP_VERSION%.exe
+echo [OK] Generated: WinIconTweaker-v%APP_VERSION%.exe
 pause
