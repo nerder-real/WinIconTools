@@ -736,7 +736,7 @@ namespace ShortcutArrow
             };
             Label versionLine = new Label
             {
-                Text = "v1.0.0",
+                Text = "v" + AppInfo.Version,
                 Location = new Point(0, 825),
                 Size = new Size(520, 14),
                 TextAlign = ContentAlignment.MiddleCenter,
