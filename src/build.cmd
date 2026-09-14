@@ -2,8 +2,8 @@
 setlocal
 cd /d "%~dp0"
 
-rem ===== APP_VERSION: change here only, exe filename and in-app version follow =====
-set "APP_VERSION=1.0.0"
+rem ===== APP_VERSION: default for local builds; CI overrides it from the git tag =====
+if not defined APP_VERSION set "APP_VERSION=1.0.0"
 
 set "CSC=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 if not exist "%CSC%" set "CSC=%WINDIR%\Microsoft.NET\Framework\v4.0.30319\csc.exe"
@@ -44,5 +44,6 @@ if errorlevel 1 (
     exit /b 1
 )
 echo [OK] Generated: WinIconTools-v%APP_VERSION%.exe
-powershell -NoProfile -ExecutionPolicy Bypass -File release.ps1
+rem Local builds also produce a Chinese-named copy; on CI skip it (asset names are ASCII)
+if "%CI%"=="" powershell -NoProfile -ExecutionPolicy Bypass -File release.ps1
 pause

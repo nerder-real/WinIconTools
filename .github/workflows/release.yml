@@ -1,0 +1,41 @@
+name: Build Release
+
+# 推送 v* 标签时自动构建并发布 Release（附件：WinIconTools-v<版本>.exe）
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read version from tag
+        id: ver
+        shell: pwsh
+        run: |
+          $v = "${{ github.ref_name }}".TrimStart('v')
+          "version=$v" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+      - name: Build exe
+        shell: cmd
+        env:
+          APP_VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          cd src
+          build.cmd < nul
+
+      - name: Create release and upload asset
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $exe = "WinIconTools-v${{ steps.ver.outputs.version }}.exe"
+          gh release create $tag $exe --title "桌面图标美化工具 $tag" --notes "功能与使用说明见 README。"
