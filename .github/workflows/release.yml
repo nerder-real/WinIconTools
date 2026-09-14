@@ -39,3 +39,7 @@ jobs:
           $tag = "${{ github.ref_name }}"
           $exe = "WinIconTools-v${{ steps.ver.outputs.version }}.exe"
           gh release create $tag $exe --title "桌面图标美化工具 $tag" --notes "功能与使用说明见 README。"
+          if ($LASTEXITCODE -ne 0) {
+            # Release 已存在（如重打旧标签）：只覆盖附件
+            gh release upload $tag $exe --clobber
+          }
